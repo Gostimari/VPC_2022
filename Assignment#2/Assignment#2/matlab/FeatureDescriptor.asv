@@ -1,5 +1,10 @@
 function [Descriptors] = FeatureDescriptor(Img,Pts,Dscpt_type,Patch_size)
     
+%     imresize
+%     reshape
+%     normalize
+
+    
     if (Dscpt_type == 'SIMPLE')
 
         for i = 1:size(Pts.x, 1)
@@ -12,6 +17,13 @@ function [Descriptors] = FeatureDescriptor(Img,Pts,Dscpt_type,Patch_size)
             Descriptors(i,:) = reshape(window,1,N*N); % Despriptor line is a vector of size(N*N,1) with the grey levels of wich pixel in the window
         end
 
+            figure();
+            imshow(Img,[]);
+            hold on
+        
+            for n = 1:size(Pts.x,1)
+                drawSquare(Pts.y(n),Pts.x(n),5,0);
+            end
     else
 
         for i = 1:size(Pts.x,1)
@@ -22,17 +34,11 @@ function [Descriptors] = FeatureDescriptor(Img,Pts,Dscpt_type,Patch_size)
             imgpad = padarray(Img,[floor(N/2) floor(N/2)],'replicate','both'); % Increases image in half the size of N 
             window = imgpad(Pts.x(i)+floor(N/2)-2:Pts.x(i)+floor(N/2)+2,Pts.y(i)+floor(N/2)-2:Pts.y(i)+floor(N/2)+2); % 5x5 window centered in the keypoint
             B = normalize(window);
+            A = imwarp(B, Pts.o(i));
+            resized = imresize(A,[8 8], 'Scale', 0.2);
+            Descriptors(i,:) = imresize(A,1,64);
 
-            angle = -Pts.o(i);
-            TR= [cosd(angle) sind(angle) 0;-sind(angle) cosd(angle) 0;0 0 1];
-            Tform = affine2d(TR);
-
-            A = imwarp(B, Tform);
-            resized = imresize(A,[N N]);
-            Descriptors(i,:) = reshape(resized,1,N*N);
         end
-
-    end
 
 end
         

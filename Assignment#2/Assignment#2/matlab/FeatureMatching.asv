@@ -1,16 +1,16 @@
 function [Match] = FeatureMatching(Dscpt1,Dscpt2,Tresh,Metric_TYPE)
     
 
-    if (Metric_TYPE == 'SSD')
+    if Metric_TYPE == 'SSD'
 
         Match = [];
     
         SSD = zeros(size(Dscpt1,1), size(Dscpt2,1));
     
         % Calculates all the ssd
-        for i=1:size(Dscpt1,1)
-            for j=1:size(Dscpt2,1)
-                SSD(i,j)=sum((Dscpt1(i,:)-Dscpt2(j,:)).^2);
+        for i=1:size(Desc1,1)
+            for j=1:size(Desc2,1)
+                SSD(i,j)=sum((Desc1(i,:)-Desc2(j,:)).^2);
             end
             j=1;
         end
@@ -22,19 +22,16 @@ function [Match] = FeatureMatching(Dscpt1,Dscpt2,Tresh,Metric_TYPE)
             
             if minSSD(i) < Tresh
                 Match = [Match;i c minSSD(i)];
+            else
+                NoMatch = [NoMatch;i c minSSD(i)];
             end
         end
 
-     else
-
-        Match = [];
-    
-        SSD = zeros(size(Dscpt1,1), size(Dscpt2,1));
-
+    else
         % Calculates all the ssd
-        for i=1:size(Dscpt1,1)
-            for j=1:size(Dscpt2,1)
-                SSD(i,j)=sum((Dscpt1(i,:)-Dscpt2(j,:)).^2);
+        for i=1:size(Desc1,1)
+            for j=1:size(Desc2,1)
+                SSD(i,j)=sum((Desc1(i,:)-Desc2(j,:)).^2);
             end
             j=1;
         end
@@ -48,11 +45,15 @@ function [Match] = FeatureMatching(Dscpt1,Dscpt2,Tresh,Metric_TYPE)
         
         for i=1:size(RT,1)
             [~,c]=find(SSD(i,:) == minSSD(i));
+            
             if RT(i) < Tresh
                 Match = [Match;i c minSSD(i)];
+            else
+                NoMatch = [NoMatch;i c minSSD(i)];
             end
+            e
     
-        end
+    end
 
     end
     
