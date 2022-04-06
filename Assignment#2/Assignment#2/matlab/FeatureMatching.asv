@@ -1,6 +1,6 @@
 function [Match] = FeatureMatching(Dscpt1,Dscpt2,Tresh,Metric_TYPE)
     
-    if (Metric_TYPE == "SSD")
+    if (Metric_TYPE == 'SSD')
 
         Match = [];
     
@@ -24,7 +24,7 @@ function [Match] = FeatureMatching(Dscpt1,Dscpt2,Tresh,Metric_TYPE)
             end
         end
 
-    else
+    elseif Metric_TYPE == ''
 
         Match = [];
     
@@ -48,7 +48,7 @@ function [Match] = FeatureMatching(Dscpt1,Dscpt2,Tresh,Metric_TYPE)
         for i=1:size(RT,1)
             [~,c]=find(SSD(i,:) == minSSD(i));
             if RT(i) < Tresh
-                Match = [Match;i c minSSD(i)];
+                Match(i,:) = [i c minSSD(i)];
             end
     
         end

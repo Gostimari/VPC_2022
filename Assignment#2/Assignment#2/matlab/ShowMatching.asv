@@ -18,10 +18,10 @@ function ShowMatching(MatchList,img1,img2,Dscpt1,Dscpt2)
         v(1) = v(1)/v(3);
         v(2) = v(2)/v(3);
         
-        if (MatchList(i,3) <= v(1) + Tresh_Match  && MatchList(i,3) >= v(1) - Tresh_Match ) && (MatchList(i,4)<= v(2) + Tresh_Match && MatchList(i,4) >= v(2) - Tresh_Match) 
+        if (MatchList(i,3) <= v(1) + Tresh_Match  && MatchList(i,3) >= v(1) - Tresh_Match )
             scatter(MatchList(i,1), MatchList(i,2),'r','s')
             scatter(dim+MatchList(i,3), MatchList(i,4),'r','o')
-            plot([MatchList(i,1) MatchList(i,3)+dim],[MatchList(i,2) MatchList(i,4)],'g');
+            plot([MatchList(i,1) MatchList(i,3)+dim],[MatchList(i,2) MatchList(i,3)],'g');
         end
     end
     hold off
