@@ -1,7 +1,7 @@
 clear;
 close all;
 
-datadir     = '../datasets/wall';    %the directory containing the images
+datadir     = '../datasets/boas';    %the directory containing the images
 resultsdir  = '../results'; %the directory for dumping results
 
 %parameters
