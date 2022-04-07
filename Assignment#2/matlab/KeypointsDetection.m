@@ -12,8 +12,8 @@ function [Pts] = KeypointsDetection(img0,Pts)
         sigma(j) = 2^j * sigma0; %Obtain the different sigmas through the pyramid
         H = -sigma(j)^2*fspecial('log',2*ceil(3*sigma(j))+1,sigma(j)); %obtain the log kernel
         G(:,:,j) = conv2(img0,H,'same'); %Apply the log kernel to the image
-        figure();
-        imshow(G(:,:,j),[]);
+        %figure();
+        %imshow(G(:,:,j),[]);
     end
 
     for i = 1:size(Pts.x,1)

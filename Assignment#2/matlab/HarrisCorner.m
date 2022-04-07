@@ -24,19 +24,11 @@ Gaussdy = ImageFilter(Gauss,Sobely);
 Gx = ImageFilter(img0,Gaussdx);
 Gy = ImageFilter(img0,Gaussdy);
 
-%h1 = sum(imgx.*imgx);
-%h2 = sum(h1)
-
 h1 = ImageFilter(Gx.^2,Gauss1);
 h2 = ImageFilter(Gy.^2, Gauss1);
 h3 = ImageFilter(Gx.*Gy, Gauss1);
 
-%H = [sum(h1) sum(h3); sum(h3) sum(h2)];
-
-%c = det(H)-0.1*(trace(H)).^2;
 c = h1.*h2-(h3).^2-0.1.*(h1+h2).^2;
-%thresh=0.05*max(c,[],'all');
-%thresh = 0.02;
 c(c < thresh*max(max(c))) = 0;
 
 [x,~]=find(c); %returns the number of non-zero entries

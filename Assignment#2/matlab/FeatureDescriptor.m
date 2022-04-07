@@ -14,13 +14,9 @@ function [Descriptors] = FeatureDescriptor(Img,Pts,Dscpt_type,Patch_size)
 
 
     else
-
-            figure();
-            hold on
-
-            N = Patch_size; %40
-            window = zeros(N); % Simple window 40x40 square
-            Descriptors = zeros(size(Pts.x,1),8*8); %Array with the number of rows of keypoints and columns with dimension of the feature
+        N = Patch_size; %40
+        window = zeros(N); % Simple window 40x40 square
+        Descriptors = zeros(size(Pts.x,1),8*8); %Array with the number of rows of keypoints and columns with dimension of the feature
 
         for i = 1:size(Pts.x,1)            
             imgpad = padarray(Img,[floor(N/2) floor(N/2)],'replicate','both'); % Increases image in half the size of N 
@@ -30,12 +26,10 @@ function [Descriptors] = FeatureDescriptor(Img,Pts,Dscpt_type,Patch_size)
             TR= [cosd(angle) sind(angle) 0; -sind(angle) cosd(angle) 0;0 0 1];
             Tform = affine2d(TR);
 
-            A = imwarp(window, Tform);
-            resized = imresize(A,[8 8]);
+            A = imwarp(window, Tform); %rotate the window with Tform
+            resized = imresize(A,[8 8]); % 8x8 window centered in the keypoint
             Descriptors(i,:) = reshape(resized,1,8*8);
             Descriptors(i,:) = normalize(Descriptors(i,:));
-
-            imshow(resized, []);
 
         end
 

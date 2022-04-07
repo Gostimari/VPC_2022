@@ -1,7 +1,7 @@
 clear;
 close all;
 
-datadir     = '../datasets/graf';    %the directory containing the images
+datadir     = '../datasets/wall';    %the directory containing the images
 resultsdir  = '../results'; %the directory for dumping results
 
 %parameters
@@ -75,7 +75,7 @@ if size(Dscrpt1,1) > Min_Query_features
     
     %Show matched keypoints and keypoint's feature patches
     
-    ShowMatching(MatchList,img1,img2,Dscrpt1,Dscrpt2)
+    ShowMatching(MatchList,img1,img2,Dscrpt1,Dscrpt2, Pts_N1, Pts_N2)
     
   end
 end
