@@ -10,35 +10,55 @@ function ShowMatching(MatchList,img1,img2,Dscpt1,Dscpt2, Pts1, Pts2)
     img_m = cat(2,img1,img2); % colapse the two images in on plot
     dim = size(img1,2); % scale to use on the x coordenates to the second image
 
-    figure; 
-    imshow(img_m,[]);
+    figure;
+    imshow(img_m, []);
     hold on;
     
     for i = 1:size(MatchList, 1)
-        scatter(Pts1.y(MatchList(i,1)), Pts1.x(MatchList(i,1)),'r','s') %show the image 1 key points
-        scatter(dim + Pts2.y(MatchList(i,2)), Pts2.x(MatchList(i,2)),'r','o') %show the image 2 key points
+        plot(Pts1.y(MatchList(i,1)), Pts1.x(MatchList(i,1)),'ro'); %show the image 1 key points
+        plot(dim + Pts2.y(MatchList(i,2)), Pts2.x(MatchList(i,2)),'bo'); %show the image 2 key points
         plot([Pts1.y(MatchList(i,1)) Pts2.y(MatchList(i,2)) + dim], [Pts1.x(MatchList(i,1)) Pts2.x(MatchList(i,2))], 'g'); %draw a line between the key points matches
-    end         
+    end
 
     figure;
     flag = 1;
     for i = 1:size(MatchList,1)
-        if i == MatchList(i,1)
-            Dsc1 = imresize(Dscpt1(i,:), [8 8]); %recise the descriptor point to 8x8
-            Dsc2 = imresize(Dscpt2(MatchList(i,2),:), [8 8]); %recise the descriptor point to 8x8
-            
-            %Print the descriptors in 3 colums and 2 rows on the same figure
-
-            subplot(3,2,flag);
-            imshow(Dsc1);
-            subplot(3,2,flag);
-            imshow(Dsc2);
-            flag = flag + 1;
+        for j = 1:size(MatchList, 1)
+            if j == MatchList(i,1)
+                Dsc1 = imresize(Dscpt1(i,:), [8 8]); %recise the descriptor point to 8x8
+                 
+                %Print the descriptors in 3 colums and 2 rows on the same figure
+    
+                subplot(3,2,flag);
+                imshow(Dsc1);
+                flag = flag + 1;
+            end
         end
         if flag == 7
             break
         end
     end
+    
+    figure;
+    flag = 1;
+    for i = 1:size(MatchList,1)
+        for j = 1:size(MatchList, 1)
+            if j == MatchList(i,2)
+                 Dsc2 = imresize(Dscpt2(MatchList(i,2),:), [8 8]); %recise the descriptor point to 8x8
+    
+                 %Print the descriptors in 3 colums and 2 rows on the same figure
+                 subplot(3,2,flag);
+                 imshow(Dsc2);
+                 flag = flag + 1;
+            end
+        end
+        if flag == 7
+            break
+        end
+    end
+
     hold off;
+
+    pause(1);
 end
         

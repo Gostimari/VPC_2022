@@ -45,6 +45,10 @@ function [Pts] = KeypointsDetection(img0,Pts)
         Pts.o = [Pts.o; Gori(Pts.x(m),Pts.y(m))];
     end
 
+%     imshow(img0, []);
+%     hold on
+%     axis on
+% 
 %     for n = 1:size(Pts.x,1)
 %         drawSquare(Pts.y(n),Pts.x(n),2*sqrt(2)*Pts.s(n),Pts.o(n));
 %     end
