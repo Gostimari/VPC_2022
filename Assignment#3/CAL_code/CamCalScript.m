@@ -9,8 +9,8 @@ image(img_I);
 axis image
 
 % Decomposition Approach
-D_type = 'QR';
-%D_type = 'EXP';
+%D_type = 'QR';
+D_type = 'EXP';
 
 %This function displays the calibration image and allows the user to click
 %in the image to get the input points. Left click on the chessboard corners
@@ -20,7 +20,9 @@ D_type = 'QR';
 %point.
 %You don't have to do this all the time, just store the resulting xy and
 %XYZ matrices and use them as input for your algorithms.
-[xy XYZ] = getpoints(IMG_NAME);
+%[xy XYZ] = getpoints(IMG_NAME);
+load xy
+load XYZ
 
 % === Task 2 DLT algorithm ===
 
@@ -32,7 +34,7 @@ D_type = 'QR';
 
 % === Task 4 Gold algorithm with radial distortion estimation ===
 
-%[K, R, t, Kd, error] = runGoldRadial(xy, XYZ, D_type);
+[K, R, t, Kd, error] = runGoldRadial(xy, XYZ, D_type);
 
 % === Bonus: Undistort input Image ===
 

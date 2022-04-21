@@ -19,6 +19,6 @@ while but == 1
     xy(:, n) = [xi; yi]; % add a new column with the current values
     input = inputdlg('[X Y Z]'); % show input dialog
     XYZi = str2num(input{1}); % convert to number
-    XYZ(:, n) = XYZi; % add a new column with the current values
+    XYZ(:, n) = XYZi; % add a new column with the current values 
 end
 end
