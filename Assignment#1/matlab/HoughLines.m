@@ -8,7 +8,7 @@ N=7; %Size of the neighborhood
 
 for i=1:nLines
     Hnew = sort(H(:),"descend");
-    peak=Hnew(1);   
+    peak=Hnew(1);
     [rho,theta]=find(H == peak,1);
     
     %Suppression of close lines 

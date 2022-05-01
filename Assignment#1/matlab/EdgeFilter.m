@@ -6,15 +6,15 @@ highThreshold = 0.08;
 lowThreshold = 0.05;
 
 hsize = 2*ceil(3*sigma)+1; %Calculates the filter size
-Gauss = fspecial('gaussian',hsize,sigma); %Generates the filter
+Gauss = fspecial('gaussian',hsize,sigma); %Generates the filter ( blur na imagem e diminui o ruido)
 
 img1 = ImageFilter(img0,Gauss); %Smooths the image with gaussian filter
 
-%Sobel filter for the gradients
+%Sobel filter for the gradients (imagem que salienta os cantos)
 Sobelx = (fspecial('sobel'))';
 Sobely = fspecial('sobel');
 
-%Convolution of the sobel masks
+%Convolution of the sobel masks\
 imgx = ImageFilter(img1,Sobelx);
 imgy = ImageFilter(img1,Sobely);
 

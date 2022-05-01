@@ -34,7 +34,7 @@ c(c < thresh*max(max(c))) = 0;
 [x,~]=find(c); %returns the number of non-zero entries
 for i=1:numel(x)
     Cnew = sort(c(:),"descend");
-    Chigh=Cnew(1);   
+    Chigh=Cnew(1);
 
     if Chigh == 0
         break
