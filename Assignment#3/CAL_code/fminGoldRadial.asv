@@ -24,7 +24,7 @@ for i = 1:size(XYZ,2)
     %calculate the distortion factor
     L(i) = 1 + ke(1)*r(i)^2 + ke(2)*r(i)^4;
 
-    %Actual position after radial distortion
+    %Actual positi
      xd(i) = x(i,:)*L(i);
      yd(i) = y(i,:)*L(i);
 end

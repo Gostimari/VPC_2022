@@ -25,7 +25,7 @@ end
 
 %compute reprojection error
 for i = 1:size(XYZ,2)
-    xy2(i,:)=P*[XYZ(:,i);1];
+    xy2(i,:)=P*[XYZ(:,i);1]; %para as duas matrizes ficarem na mesma diemensão, acrescentar 1 nos z
 end
 
 %change 3D point location to 2D
