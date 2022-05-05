@@ -1,18 +1,28 @@
-function [K, R, C, error] = runDLT(xy, XYZ, D_type)
+function [K, R, C, Kd, error] = runGoldRadial(xy, XYZ, Dec_type)
 
 %normalize data points
 [xy_normalized, XYZ_normalized, T, U] = normalization(xy, XYZ);
 
 %compute DLT
-[P_normalized] = dlt(xy_normalized, XYZ_normalized);
+[Pn] = dlt(xy_normalized, XYZ_normalized);
+
+% Distortion Coeficient Initial Values
+Kd= [0 0];
+
+%minimize geometric error
+pn = [Pn(1,:) Pn(2,:) Pn(3,:) Kd];
+for i=1:20
+    [pn] = fminsearch(@fminGoldRadial, pn, [], xy_normalized, XYZ_normalized);
+end
 
 %denormalize camera matrix
-P = pinv(T)*P_normalized*U;
+Kd = [pn(1,13:14)];
+P = pinv(T)*Pn*U;
 
 %factorize camera matrix in to K, R and t
-if D_type == "QR"
+if Dec_type == "QR"
     [ K, R, C ] = decomposeQR(P);
-elseif D_type == "EXP"
+elseif Dec_type == "EXP"
     [ K, R, C ] = decomposeEXP(P);
 end
 

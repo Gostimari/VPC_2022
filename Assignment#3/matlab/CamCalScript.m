@@ -18,7 +18,7 @@ D_type = 'EXP';
 %appears after the click. You can also zoom in to the image to get more
 %precise coordinates. To finish use the right mouse button for the last
 %point.
-%You don't have to do this all the time, just store the resulting xy and
+%You don't have to do 5this all the time, just store the resulting xy and
 %XYZ matrices and use them as input for your algorithms.
 %[xy XYZ] = getpoints(IMG_NAME);
 load xy
@@ -26,7 +26,7 @@ load XYZ
 
 % === Task 2 DLT algorithm ===
 
-%[K, R, t, error] = runDLT(xy, XYZ, D_type);
+[K, R, t, error] = runDLT(xy, XYZ, D_type);
 
 % === Task 3 Gold algorithm ===
 
@@ -34,7 +34,7 @@ load XYZ
 
 % === Task 4 Gold algorithm with radial distortion estimation ===
 
-[K, R, t, Kd, error] = runGoldRadial(xy, XYZ, D_type);
+%[K, R, t, Kd, error] = runGoldRadial(xy, XYZ, D_type);
 
 % === Bonus: Undistort input Image ===
 
