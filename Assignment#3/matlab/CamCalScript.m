@@ -26,15 +26,15 @@ load XYZ
 
 % === Task 2 DLT algorithm ===
 
-[K, R, t, error] = runDLT(xy, XYZ, D_type);
+[K, R, t, error1] = runDLT(xy, XYZ, D_type);
 
 % === Task 3 Gold algorithm ===
 
-%[K, R, t, error] = runGold(xy, XYZ, D_type);
+[K, R, t, error2] = runGold(xy, XYZ, D_type);
 
 % === Task 4 Gold algorithm with radial distortion estimation ===
 
-%[K, R, t, Kd, error] = runGoldRadial(xy, XYZ, D_type);
+[K, R, t, Kd, error3] = runGoldRadial(xy, XYZ, D_type);
 
 % === Bonus: Undistort input Image ===
 
