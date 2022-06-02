@@ -9,7 +9,7 @@ load('../data/intrinsics.mat', 'K1', 'K2');
 
 load('../data/extrinsics.mat', 'R1', 'R2', 't1', 't2');
 
-% Rectify images
+% Rectify images/home/duarte/Documentos/UC/5º Matricula/2ºSemestre/VPC/PL_Backup/VPC_Castilho/Assignment#4/matlab/rectifyMatrices.m
 [M1, M2, K1n, K2n, R1n, R2n, t1n, t2n] = rectifyMatrices(K1, K2, R1, R2, t1, t2);
 
 [rectIL, rectIR, bbL, bbR] = warp_stereo(im1, im2, M1, M2) ;
@@ -26,9 +26,9 @@ rectImg(:,1:nC) = rectIL ;
 rectImg(:,nC+1:end) = rectIR ;
 
 % load gt info.
-load('../data/someCorresp.mat', 'pts1', 'pts2');
-gtL = pts1(1:20:end, :)';
-gtR = pts2(1:20:end, :)';
+load('../data/correspondences.mat', 'pts1', 'pts2');
+gtL = pts1(1:10:end, :)';
+gtR = pts2(1:10:end, :)';
 
 % warp left and right points
 mlx = p2t(M1,gtL);

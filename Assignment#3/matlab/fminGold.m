@@ -1,6 +1,6 @@
 function f = fminGold(p, xy, XYZ, w)
 
-%reassemble P
+%reassemble P to ignore the radial distortion coeficients
 P = [p(1:4);p(5:8);p(9:12)];
 
 %compute squared geometric error

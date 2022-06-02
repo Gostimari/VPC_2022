@@ -1,4 +1,4 @@
-function pts3d = triangulation3D(P1, pts1, P2, pts2 )
+function pts3d = triangulation1(P1, pts1, P2, pts2 )
 % triangulation estimate the 3D positions of points from 2d correspondence
 %   Args:
 %       P1:     projection matrix with shape 3 x 4 for image 1
@@ -11,9 +11,11 @@ function pts3d = triangulation3D(P1, pts1, P2, pts2 )
 %
     pts3d = zeros(length(pts1),3);
 
+    %projection points 1
     p11 = P1(1,:);
     p12 = P1(2,:);
     p13 = P1(3,:);
+    % projection points 2
     p21 = P2(1,:);
     p22 = P2(2,:);
     p23 = P2(3,:);
@@ -24,12 +26,14 @@ function pts3d = triangulation3D(P1, pts1, P2, pts2 )
         y1 = pts1(i,2);
         y2 = pts2(i,2);
 
+        % projection matrix 
         A = [y1*p13-p12; p11-x1*p13; y2*p23-p22; p21-x2*p23];
         
-        [~,~,V] = svd(A);
+        [~,~,V] = svd(A); %singular value decomposition to obtain the points
 
         pts3d(i, :) = (V(1:3,end)')/V(end,end); 
     end
+
 end
 
 

@@ -8,3 +8,7 @@ function E = computeE(F, K1, K2)
 %   Returns:
 %       E:  Essential Matrix
 %
+
+E = K1 * F * K2'; % Essencial matrix is related with fundamental matrix with this formula
+
+end

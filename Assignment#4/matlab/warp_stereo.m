@@ -25,7 +25,6 @@ function bb = mcbb(s1,s2,H1,H2)
 % s1 is the result of size(I1)
 % s2 is the result of size(I2)
 
-
 corners = [0, 0, s1(2), s1(2);
            0, s1(1), 0, s1(1)];
 corners_x = p2t(H1,corners);

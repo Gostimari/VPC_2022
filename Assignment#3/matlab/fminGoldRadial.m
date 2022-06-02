@@ -9,23 +9,17 @@ kd = [p(13) p(14)]; % radial distortion coeficients
 %Gets the position after distortion
 xyd=inv(K)*xy;
 
-% Calculate the principle point
-A = P(:,1:3);
-rho = 1./norm(A(3,:));
-u0 = rho^2*dot(A(1,:),A(3,:));
-v0 = rho^2*dot(A(2,:),A(3,:));
-
 Aux = [R -R*C(1:3)];
 %compute squared geometric error with radial distortion
 for i = 1:size(XYZ,2)
-    %calculate the ideal linear projection of a 3D point D
+    %calculate the ideal linear projection of a 3D point P
     xy2(i,:)=Aux*[XYZ(:,i)];
-    %change it to 2D
+    %change it to 2D - eq 19
     x(i) = xy2(i,1)/xy2(i,3); 
     y(i) = xy2(i,2)/xy2(i,3); 
 
     %radius of the distortion
-    r(i) = sqrt((x(i)-u0)^2 + (y(i)-v0)^2);
+    r(i) = sqrt((x(i))^2 + (y(i))^2);
     
     %calculate the distortion factor
     L(i) = 1 + kd(1)*r(i)^2 + kd(2)*r(i)^4;
