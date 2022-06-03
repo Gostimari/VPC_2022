@@ -1,4 +1,4 @@
-function [F,Fd] = computeF(pts1, pts2)
+function [Fd] = computeF(pts1, pts2)
 % computeF:
 %   pts1 - Nx2 matrix of (x,y) coordinates
 %   pts2 - Nx2 matrix of (x,y) coordinates
@@ -25,10 +25,13 @@ Fr = reshape(V(:,9),[3 3])'; % F is a 3x3 matrix with the 9 columm of matrix V (
 [U1,D1,V1] = svd(Fr);
 D1(3,3) = 0;  % Replace the smallest singular value of D with 0
 F1 = U1*D1*V1'; % Fudamental Matrix
+
+%Refine
+F1 = refineF(F1,pnl,pnr);
+
 Fd = Tr'*F1*Tl; %  normalized eight point algorithm to obtain F
 % Tr e Tl transform matrices obtained on the points normalization 
 
-%Refine
-F = refineF(Fd,pnl,pnr);
+
 
 end

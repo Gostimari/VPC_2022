@@ -8,17 +8,17 @@ load('../data/correspondences.mat','M','pts1','pts2');
 load('../data/intrinsics.mat','K1','K2');
 load('../data/coords.mat');
 
-[F,Fd] = computeF(pts1, pts2); %Compute Fundamental Matrix
+[Fd] = computeF(pts1, pts2); %Compute Fundamental Matrix
 
 coords2  = findEpipolarMatches(im1, im2, Fd, coords1); %Epipolar Match
-% subplot 121
-% hold on
-% imshow(im1);
-% scatter(coords1(:,1),coords1(:,2),40,'.','r');
-% subplot 122
-% hold on
-% imshow(im2);
-% scatter(coords2(:,1),coords2(:,2),40,'.','b');
+subplot 121
+hold on
+imshow(im1);
+scatter(coords1(:,1),coords1(:,2),40,'.','r');
+subplot 122
+hold on
+imshow(im2);
+scatter(coords2(:,1),coords2(:,2),40,'.','b');
 
 E = computeE(Fd, K1, K2); %Compute Essencial Matrix
 
